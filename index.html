@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Binary Tree</title>
+</head>
+<body>
+<main>
+    Результат: <span class="result"></span>
+</main>
+<script>
+    let tree = {
+        val: 'A',
+        leaf1: {
+            val: 'B',
+            leaf1: {
+                val: 'D',
+                leaf1: {
+                    val: 'G'
+                },
+                leaf2: {
+                    val: 'H',
+                    leaf2: {
+                        val: 'J'
+                    }
+                }
+            },
+            leaf2: {
+                val: 'E'
+            }
+        },
+        leaf2: {
+            val: 'C',
+            leaf1: {
+                val: 'F',
+                leaf2: {
+                    val: 'I'
+                }
+            }
+        }
+    };
+
+    function getPath(tree) {
+        let root = tree;
+        let leafsArray = [];
+        let leftleafsArray = [];
+        let rightleafsArray = [];
+        let result = [];
+        result.push(root.val);
+
+        while(1) {
+            if(root.leaf1 && (leftleafsArray.indexOf(root) === -1)) {
+                leafsArray.push(root);
+                leftleafsArray.push(root);
+                root = root.leaf1;
+                result.push(root.val);
+            } else if(root.leaf2 && (rightleafsArray.indexOf(root) === -1)) {
+                leafsArray.push(root);
+                rightleafsArray.push(root);
+                root = root.leaf2;
+                result.push(root.val);
+            } else {
+                root = leafsArray.pop();
+                if(!root) break;
+            }
+        }
+
+        return result;
+    }
+    document.querySelector('.result').innerHTML = getPath(tree);
+
+</script>
+</body>
+</html>
