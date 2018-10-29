@@ -9,6 +9,7 @@
     Результат: <span class="result"></span>
 </main>
 <script>
+
     let tree = {
         val: 'A',
         leaf1: {
@@ -48,7 +49,7 @@
         let result = [];
         result.push(root.val);
 
-        while(1) {
+        while(root) {
             if(root.leaf1 && (leftleafsArray.indexOf(root) === -1)) {
                 leafsArray.push(root);
                 leftleafsArray.push(root);
@@ -61,7 +62,6 @@
                 result.push(root.val);
             } else {
                 root = leafsArray.pop();
-                if(!root) break;
             }
         }
 
